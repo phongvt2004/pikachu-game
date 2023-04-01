@@ -1,18 +1,7 @@
 #include "header.h"
 #include "graphics.h"
 #include "home.h"
-
-struct Cell {
-    char c;
-    int x,y;
-};
-
-struct Board {
-    Cell ** c;
-    int col, row;
-};
-
-
+#include "game.h"
 
 int main() {
     SetWindowSize(120, 30);
@@ -35,7 +24,7 @@ int main() {
     else if(key == '\n' || key == '\r') {
         if(choice == 3) return 0;
         else if(choice == 1) {
-
+            game();
         }
     }
     return 0;
