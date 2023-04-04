@@ -4,8 +4,8 @@
 #include "game.h"
 
 int main() {
-    SetWindowSize(120, 30);
-    SetScreenBufferSize(120, 30);
+    SetWindowSize(400, 30);
+    SetScreenBufferSize(400, 30);
     DisableResizeWindow();
     DisableCtrButton(false, true, true);
     ShowCur(false);
@@ -22,9 +22,13 @@ int main() {
     } while (key != '\n' and key != '\r' and key != 27);
     if(key == 27) return 0;
     else if(key == '\n' || key == '\r') {
+        ClearScreen();
         if(choice == 3) return 0;
-        else if(choice == 1) {
+        else if(choice == 0) {
             game();
+        } else if(choice == 1) {
+            PlaySound(NULL, NULL, SND_ASYNC);
+            system("pause");
         }
     }
     return 0;

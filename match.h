@@ -1,4 +1,5 @@
 #include "header.h"
+using namespace std;
 
 bool IMatching(char ** board, Cell start, Cell end);
 bool LMatching(char ** board, Cell start, Cell end);

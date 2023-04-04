@@ -3,7 +3,6 @@
 #include "graphics.h"
 
 void generateHeader(int x, int y, int color) {
-    
     textcolor(color);
     gotoXY(x,0+y);
     cout << "J5!     :YJ.    !5!   ?JJJYJJJJ:  ^?JYYJ!.  ~J.    .J~  7?  ~5~     J!   .7JJYYJ!" << endl;
@@ -39,7 +38,7 @@ void generateOption(int x, int y, string text, int color) {
     textcolor(color);
     gotoXY(x,y);
     cout << " ";
-    for(int i = 0; i < text.length() + 4; i++) {
+    for(unsigned int i = 0; i < text.length() + 4; i++) {
         cout <<"-";
     }
     cout << " ";
@@ -55,84 +54,60 @@ void generateOption(int x, int y, string text, int color) {
     textcolor(7);
 }
 
-void generateBoard(Board * board, int x, int y, Cell * curr, bool hasStart, Cell start) {
-
+void clean(int fromX, int fromY, int toX, int toY) {
+    SetColor(0, 7);
+    int backup = fromY;
+    while(fromX < toX) {
+        cout << fromX << endl;
+        gotoXY(fromX, fromY);
+        // cout << fromX << " " << fromY << endl;
+        while(fromY <= toY) {
+            cout << " ";
+            fromY++;
+        }
+        fromY = backup;
+        fromX++;
+    }
+}
+void generateBoard(Board * board, int x, int y, Cell * curr, bool hasStart, Cell start, bool suggest, Cell sugStart, Cell sugEnd) {
     for(int i = 0; i < board -> row; i++) {
-        gotoXY(x,y+i*4);
-
         for(int j = 0; j < board -> col; j++) {
-                cout << " ---------";
-        }
-        cout << endl;
-        gotoXY(x,y+i*4+1);
-        for(int j = 0; j < board -> col; j++) {
-            if (j == board -> col-1) {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "         ";
-                SetColor(0, 7);
-                cout << "|";
+            if(board ->cell[i][j].content == ' ') {
+                continue;
             }
-            else {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "         ";
-                SetColor(0, 7);
-            }
-        }
-        cout << endl;
-        gotoXY(x,y+i*4+2);
-        for(int j = 0; j < board -> col; j++) {
-            if (j == board -> col-1) {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "    ";
-                cout << board->cell[i][j].content;
-                cout<<"    ";
-                SetColor(0, 7);
-                cout <<"|";
-            }
-            else {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "    ";
-                cout << board->cell[i][j].content;
-                cout << "    ";
-                SetColor(0, 7);
-            }
-        }
-        cout << endl;
-        gotoXY(x,y+i*4+3);
-        for(int j = 0; j < board -> col; j++) {
-            if (j == board -> col-1) {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "         ";
-                SetColor(0, 7);
-                cout << "|";
-            }
-            else {
-                cout << "|";
-                if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
-                    SetColor(15, 0);
-                cout << "         ";
-                SetColor(0, 7);
-            }
-        }
-        cout << endl;
-        // for(int j = 0; j < board.col; j++) {
-        //     cout << "|  " << board.cell[i][j].content <<"  |" << endl;
-        // }
-        gotoXY(x,y+i*4+4);
-        if(i == board -> row - 1) {
-            for(int j = 0; j < board -> col; j++) {
-                cout << " ---------";
-            }
+            gotoXY(x+j*10,y+i*4);
+            cout << " --------- ";
+            gotoXY(x+j*10,y+i*4+1);
+            cout << "|";
+            if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
+                SetColor(15, 0);
+            if(suggest and ((sugStart.x == i and sugStart.y == j) or (sugEnd.x == i and sugEnd.y == j)))
+                SetColor(10, 0);
+            cout << "         ";
+            SetColor(0, 7);
+            cout << "|";
+            gotoXY(x+j*10,y+i*4+2);
+            cout << "|";
+            if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
+                SetColor(15, 0);
+            if(suggest and ((sugStart.x == i and sugStart.y == j) or (sugEnd.x == i and sugEnd.y == j)))
+                SetColor(10, 0);
+            cout << "    ";
+            cout << board->cell[i][j].content;
+            cout<<"    ";
+            SetColor(0, 7);
+            cout <<"|";
+            gotoXY(x+j*10,y+i*4+3);
+            cout << "|";
+            if((curr -> x == i and curr -> y == j) or (hasStart and start.x == i and start.y == j))
+                SetColor(15, 0);
+            if(suggest and ((sugStart.x == i and sugStart.y == j) or (sugEnd.x == i and sugEnd.y == j)))
+                SetColor(10, 0);
+            cout << "         ";
+            SetColor(0, 7);
+            cout << "|";
+            gotoXY(x+j*10,y+i*4+4);
+            cout << " --------- ";
         }
     }
 }
