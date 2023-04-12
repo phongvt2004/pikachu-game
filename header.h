@@ -5,6 +5,7 @@
 #include <ctime>
 #include <string>
 #include <string.h>
+#include <algorithm>
 #define COL 10
 #define ROW 6
 using namespace std;
@@ -19,14 +20,10 @@ struct Board {
     int col, row;
 };
 
-struct Player {
-    char username[20];
-    int points;
-};
-
 struct Record {
     char board[ROW][COL];
     int col, row;
+    int lives;
     int curr_x, curr_y;
     int points;
 };
@@ -41,4 +38,4 @@ struct Account {
 struct Players {
     char username[20];
     int maxPoints;
-}
+};

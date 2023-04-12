@@ -1,13 +1,13 @@
 #include "header.h"
-#include "savefile.h"
 
+
+// đăng nhập
 bool login(char username[], char password[], int &index, string &error, bool &hasRecord, Record &record) {
     Account * account;
     int numAccount;
     read_account(account, numAccount);
     bool hasUser = false;
     for (int i = 0; i < numAccount; i++) {
-        cout << strcmp(account[i].username, username) << endl;
         if(strcmp(account[i].username, username) == 0) {
             hasUser = true;
             if(strcmp(account[i].password, password) == 0) {
@@ -29,6 +29,8 @@ bool login(char username[], char password[], int &index, string &error, bool &ha
     return false;
 }
 
+
+// đăng kí
 bool signup(char username[20], char password[20],  int &index, string &error) {
     Account * account;
     int numAccount;

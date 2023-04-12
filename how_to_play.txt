@@ -1,0 +1,29 @@
+ _______________________________________________________________________ 
+|												|
+|				   HOW     TO     PLAY 					|
+|_______________________________________________________________________|
+|			|									|
+|			|	The Matching Game (commonly known as the		|
+|			|  Pikachu Puzzle Game) includes board of multiple	|
+|			|  cells, each of which presents a figuare.		|
+|			|									|
+|			|	Each level, the player will have 3 lives. Player|
+|   GAME RULES 	|  will lose 1 life if the pairing is not valid. If   |
+|   INFORMATION 	|  the player's life returns to 0, the game is over.	|
+| 			| 									|
+|    			|	The player finds and matches a pair of cells 	|
+|   			|  that contain the same figure and connect each 	|
+|			|  other in some particuar pattern (I/L/U/Z matching).|
+|			|									|
+|			|     The game ends when all matching pairs are found.|
+|_________________|_____________________________________________________|
+|			|									|
+|			|	UP:  Up Arrow		DOWN:  Down Arrow		|
+|	 MOVE		|									|
+|			|	LEFT:  Left Arrow		RIGHT:  Right Arrow	|
+|_________________|_____________________________________________________|
+|			|									|
+|			|	Each matching pair found: +100 points.	      |
+|	 SCORE	|									|
+|			|	Each time player ask for help: -200 points.     |
+|_________________|_____________________________________________________|

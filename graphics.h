@@ -4,8 +4,6 @@
 #include <conio.h>
 #include<ctime>
 #include "windows.h"
-//======= lấy tọa độ x của con trỏ hiện tại =============
-#define KEY_NONE	-1
 
 void ClearScreen()
   {
@@ -43,21 +41,6 @@ void ClearScreen()
   /* Move the cursor home */
   SetConsoleCursorPosition( hStdOut, homeCoords );
   }
-int whereX()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
-		return csbi.dwCursorPosition.X;
-	return -1;
-}
-//========= lấy tọa độ y của con trỏ hiện tại =======
-int whereY()
-{
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
-		return csbi.dwCursorPosition.Y;
-	return -1;
-}
 //============== dịch con trỏ hiện tại đến điểm có tọa độ (x,y) ==========
 void gotoXY(int x, int y)
 {
@@ -89,33 +72,6 @@ void ShowCur(bool CursorVisibility)
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
 	SetConsoleCursorInfo(handle, &cursor);
 }
-//======= trả về mã phím người dùng bấm =========
-int inputKey()
-{
-	if (_kbhit()) //true
-	{
-		int key = _getch();
-
-		if (key == 224)
-		{
-			key = _getch();
-			return key + 1000;
-		}
-
-		return key;
-	}
-	else
-	{
-		return KEY_NONE;
-	}
-	return KEY_NONE;
-}
-void textcolor(int x)
-{
-	HANDLE mau;
-	mau = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(mau, x);
-}
 
 void SetColor(int backgound_color, int text_color)
 {
@@ -125,6 +81,7 @@ void SetColor(int backgound_color, int text_color)
     SetConsoleTextAttribute(hStdout, color_code);
 }
 
+// chỉnh sửa kích thước cửa sổ
 void SetWindowSize(SHORT width, SHORT height)
 {
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -138,6 +95,7 @@ void SetWindowSize(SHORT width, SHORT height)
     SetConsoleWindowInfo(hStdout, 1, &WindowSize);
 }
 
+// chỉnh sửa kích thước buffer
 void SetScreenBufferSize(SHORT width, SHORT height)
 {
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -149,12 +107,15 @@ void SetScreenBufferSize(SHORT width, SHORT height)
     SetConsoleScreenBufferSize(hStdout, NewSize);
 }
 
+
+// tắt chức năng thay đổi kích thước cửa sổ
 void DisableResizeWindow()
 {
     HWND hWnd = GetConsoleWindow();
     SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
 }
 
+//bật/tắt các nút chức năng
 void DisableCtrButton(bool Close, bool Min, bool Max)
 {
     HWND hWnd = GetConsoleWindow();
@@ -172,16 +133,4 @@ void DisableCtrButton(bool Close, bool Min, bool Max)
     {
         DeleteMenu(hMenu, SC_MAXIMIZE, MF_BYCOMMAND);
     }
-}
-
-void setFont(int width, int height) {
-	CONSOLE_FONT_INFOEX cfi;
-	cfi.cbSize = sizeof(cfi);
-	cfi.nFont = 0;
-	cfi.dwFontSize.X = height;
-	cfi.dwFontSize.Y = width;                  // Height
-	cfi.FontFamily = TMPF_DEVICE;
-	cfi.FontWeight = 100;
-	// std::wcscpy(cfi.FaceName, L"Arial"); // Choose your font
-	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 }
