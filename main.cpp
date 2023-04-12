@@ -38,8 +38,8 @@ int main() {
         //how to play
         } else if(choice == 1) {
             string howtoplay = "how_to_play.txt";
-            printfile(howtoplay,20,3);
-            system("pause");
+            printfile(howtoplay,20,0);
+            _getch();
         //leaderboard
         } else if(choice == 2) {
             Players * players;

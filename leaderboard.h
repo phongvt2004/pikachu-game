@@ -24,8 +24,8 @@ bool checkUsername(char username[20]) {
             return false;
         }
         delete [] players;
-        return true;
     }
+    return true;
 }
 
 

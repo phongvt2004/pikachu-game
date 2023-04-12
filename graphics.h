@@ -49,22 +49,6 @@ void gotoXY(int x, int y)
 	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(hConsoleOutput, Cursor_an_Pos);
 }
-//============= đặt màu cho chữ =========
-void SetColor(WORD color)
-{
-	HANDLE hConsoleOutput;
-	hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
-	GetConsoleScreenBufferInfo(hConsoleOutput, &screen_buffer_info);
-
-	WORD wAttributes = screen_buffer_info.wAttributes;
-	color &= 0x000f;
-	wAttributes &= 0xfff0;
-	wAttributes |= color;
-
-	SetConsoleTextAttribute(hConsoleOutput, wAttributes);
-}
 //============== làm ẩn trỏ chuột ===========
 void ShowCur(bool CursorVisibility)
 {
@@ -73,6 +57,7 @@ void ShowCur(bool CursorVisibility)
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
+//=============== đặt màu cho kí tự ===========
 void SetColor(int backgound_color, int text_color)
 {
     HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -115,7 +100,7 @@ void DisableResizeWindow()
     SetWindowLong(hWnd, GWL_STYLE, GetWindowLong(hWnd, GWL_STYLE) & ~WS_SIZEBOX);
 }
 
-//bật/tắt các nút chức năng
+//bật/tắt các nút điều khiển cửa sổ
 void DisableCtrButton(bool Close, bool Min, bool Max)
 {
     HWND hWnd = GetConsoleWindow();

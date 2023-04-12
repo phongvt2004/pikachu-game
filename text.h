@@ -40,7 +40,7 @@ void generateOption(int x, int y, string text, int color) {
         cout <<"-";
     }
     cout << " ";
-    SetColor(7);
+    SetColor(0,7);
 }
 
 //tính độ dài của chữ
