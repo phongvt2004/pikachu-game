@@ -311,6 +311,9 @@ void play_game(Board *&board) {
                     break;
                 }
             } while(true);
+        } else if(key == 98) {
+            bg = bg == 1 ? 2 : 1;
+            clear = true;
         }
         else if(key == 104) {
             points -= 200;
